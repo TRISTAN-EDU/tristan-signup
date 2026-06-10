@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRISTAN — Assess Math Practices</title>
+  <meta name="description" content="TRISTAN makes assessing Common Core mathematical practices—and state math process standards—as easy as a multiple choice question." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@100..900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400;1,6..72,600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:        #f2a60c;
+      --brand-light:  #fcdf7a;
+      --brand-dark:   #b87505;
+      --forest:       #2d5a27;
+      --forest-light: #4a7c3f;
+      --forest-dark:  #1a3617;
+      --cream:        #fafaf7;
+      --chalk:        #f0ede6;
+      --ink:          #1c2526;
+      --muted:        #5a6a6b;
+      --ff-sans:      'Figtree', system-ui, sans-serif;
+      --ff-serif:     'Newsreader', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--ff-sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    .nav {
+      background: var(--forest);
+      padding: 0 2rem;
+      height: 58px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-family: "Figtree Variable", Figtree, system-ui, sans-serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 0;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      align-items: flex-end;
+      gap: 2rem;
+    }
+
+    .hero-copy {
+      padding-bottom: 3.5rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--brand-light);
+      color: var(--brand-dark);
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-heading {
+      font-family: var(--ff-serif);
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      line-height: 1.18;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-heading em {
+      font-style: italic;
+      color: var(--forest);
+    }
+
+    .hero-subhead {
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 50ch;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--brand);
+      color: var(--ink);
+      font-family: var(--ff-sans);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .hero-cta:hover {
+      background: var(--forest);
+      color: var(--cream);
+    }
+
+    .hero-img {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .hero-img img {
+      width: 100%;
+      max-width: 400px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .hero-img figcaption {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #b0b8b9;
+      margin-top: 0.4rem;
+      font-style: italic;
+    }
+
+    /* ── GRADIENT RULE ───────────────────────────────── */
+    .rule {
+      height: 4px;
+      background: linear-gradient(90deg, var(--forest) 0%, var(--brand) 60%, var(--brand-light) 100%);
+    }
+
+    /* ── FEATURES ────────────────────────────────────── */
+    .features {
+      background: var(--chalk);
+      padding: 3.5rem 2rem;
+    }
+
+    .features-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    .feature {
+      text-align: center;
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--forest);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.4rem;
+    }
+
+    .feature h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--forest);
+      margin-bottom: 0.5rem;
+    }
+
+    .feature p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* ── FORM SECTION ────────────────────────────────── */
+    .form-section {
+      background: var(--forest);
+      padding: 4.5rem 2rem;
+    }
+
+    .form-inner {
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .form-heading {
+      font-family: var(--ff-serif);
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+
+    .form-subhead {
+      color: rgba(250,250,247,0.7);
+      font-size: 1rem;
+      line-height: 1.65;
+      margin-bottom: 2.25rem;
+    }
+
+    /* Netlify form */
+    .capture-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .email-input {
+      flex: 1;
+      padding: 0.875rem 1rem;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      font-family: var(--ff-sans);
+      font-size: 1rem;
+      background: var(--cream);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s;
+      min-width: 0;
+    }
+
+    .email-input::placeholder { color: #9ca3af; }
+
+    .email-input:focus { border-color: var(--brand); }
+
+    .email-input.is-error { border-color: #f87171; }
+
+    .submit-btn {
+      flex-shrink: 0;
+      padding: 0.875rem 1.5rem;
+      background: var(--brand);
+      color: var(--ink);
+      font-family: var(--ff-sans);
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s, transform 0.1s;
+    }
+
+    .submit-btn:hover { background: var(--brand-dark); color: #fff; }
+    .submit-btn:active { transform: scale(0.98); }
+    .submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    .error-msg {
+      display: none;
+      text-align: left;
+      color: #fca5a5;
+      font-size: 0.8rem;
+      padding-left: 0.25rem;
+    }
+
+    .error-msg.show { display: block; }
+
+    .disclaimer {
+      color: rgba(250,250,247,0.45);
+      font-size: 0.75rem;
+      line-height: 1.5;
+      margin-top: 0.75rem;
+    }
+
+    /* Success state */
+    .success-card {
+      display: none;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(242,166,12,0.4);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+    }
+
+    .success-card.show { display: block; }
+
+    .success-check {
+      font-size: 2.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .success-card h3 {
+      font-family: var(--ff-serif);
+      font-size: 1.3rem;
+      color: var(--brand-light);
+      margin-bottom: 0.4rem;
+    }
+
+    .success-card p {
+      color: rgba(250,250,247,0.65);
+      font-size: 0.9rem;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--forest-dark);
+      text-align: center;
+      padding: 1.25rem 2rem;
+      font-size: 0.78rem;
+      color: rgba(250,250,247,0.35);
+    }
+
+    footer a {
+      color: rgba(250,250,247,0.5);
+      text-decoration: underline;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 720px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 2.5rem;
+        gap: 0;
+      }
+
+      .hero-copy { order: 2; padding-bottom: 2.5rem; }
+
+      .hero-img { order: 1; margin-bottom: 0.5rem; }
+
+      .hero-img img { max-width: 260px; }
+
+      .hero-subhead { margin-left: auto; margin-right: auto; }
+
+      .features-inner {
+        grid-template-columns: 1fr;
+        max-width: 440px;
+        gap: 2rem;
+      }
+
+      .input-row { flex-direction: column; }
+
+      .form-heading { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-logo">TRISTAN</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-copy">
+    <span class="hero-eyebrow">Math Assessment, Reimagined</span>
+    <h1 class="hero-heading">
+      Assess math practices<br>
+      <em>as easily as multiple choice.</em>
+    </h1>
+    <p class="hero-subhead">
+      TRISTAN is the first tool built specifically for assessing NCTM Process
+      Standards and standards-based mathematical practices—whether your state
+      follows Common Core or its own framework. No rubrics. No clipboards.
+      Just the insight you've always wanted.
+    </p>
+    <a href="#signup" class="hero-cta">Get Early Access</a>
+  </div>
+
+  <figure class="hero-img">
+    <img
+      src="dog-image.png"
+      alt="A golden retriever holding a torn multiple-choice bubble sheet in its mouth"
+      width="400"
+      height="480"
+    />
+    <figcaption>Multiple choice can only tell you so much.</figcaption>
+  </figure>
+</section>
+
+<div class="rule"></div>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="features-inner">
+    <div class="feature">
+      <div class="feature-icon">📐</div>
+      <h3>Practice-First Design</h3>
+      <p>Built around NCTM Process Standards and standards-based mathematical
+      practices—not just content knowledge.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">⚡</div>
+      <h3>As Simple as a Quiz</h3>
+      <p>No rubrics to decipher, no clipboards to carry. Assess in real time,
+      the same way you'd run a quick multiple choice check.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">📊</div>
+      <h3>Actionable Insight</h3>
+      <p>Spot patterns across students and classes so you can respond to what's
+      actually happening in your math classroom.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL CAPTURE -->
+<section class="form-section" id="signup">
+  <div class="form-inner">
+    <h2 class="form-heading">Stay in the loop on TRISTAN.</h2>
+    <p class="form-subhead">
+      Drop your email and we'll keep you posted as we build.
+      No spam—just updates on what TRISTAN can do for your classroom.
+    </p>
+
+    <div id="success" class="success-card">
+      <div class="success-check">✓</div>
+      <h3>You're on the list!</h3>
+      <p>We'll reach out as TRISTAN develops. Watch your inbox.</p>
+    </div>
+
+    <form
+      id="signup-form"
+      class="capture-form"
+      name="tristan-waitlist"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+    >
+      <!-- Netlify requirements -->
+      <input type="hidden" name="form-name" value="tristan-waitlist" />
+      <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+      <div class="input-row">
+        <input
+          id="email"
+          class="email-input"
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          autocomplete="email"
+          required
+        />
+        <button type="submit" class="submit-btn">Notify Me</button>
+      </div>
+
+      <div id="email-error" class="error-msg">
+        Please enter a valid email address.
+      </div>
+
+      <p class="disclaimer">
+        By submitting, you agree to receive information and updates about
+        TRISTAN. We respect your privacy and will never share your email.
+      </p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 TRISTAN
+</footer>
+
+<script>
+  const form       = document.getElementById('signup-form');
+  const emailInput = document.getElementById('email');
+  const errorMsg   = document.getElementById('email-error');
+  const successCard = document.getElementById('success');
+  const emailRe    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorMsg.classList.remove('show');
+
+    const email = emailInput.value.trim();
+
+    if (!emailRe.test(email)) {
+      errorMsg.textContent = 'Please enter a valid email address.';
+      errorMsg.classList.add('show');
+      emailInput.classList.add('is-error');
+      emailInput.focus();
+      return;
+    }
+
+    emailInput.classList.remove('is-error');
+
+    const btn = form.querySelector('.submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      });
+      form.style.display = 'none';
+      successCard.classList.add('show');
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'Notify Me';
+      errorMsg.textContent = 'Something went wrong—please try again.';
+      errorMsg.classList.add('show');
+    }
+  });
+
+  emailInput.addEventListener('input', () => {
+    emailInput.classList.remove('is-error');
+    errorMsg.classList.remove('show');
+  });
+</script>
+
+</body>
+</html>
